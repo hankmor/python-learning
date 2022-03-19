@@ -22,3 +22,4 @@ print(dict1['name'])
 # 遍历字典
 for key in dict1:
     print(key, ": ", dict1[key])
+

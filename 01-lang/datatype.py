@@ -28,6 +28,7 @@ print(a + e)  # 结果为1
 
 aInt = 10
 bInt = 3
+# 注意，python有单独的整除运算符//，触发运算符/与其他语言不同，结果为float而不是整数
 ret = aInt / bInt
 print(ret, type(ret))  # 除法运算，结果为float
 # 整除，需要使用 //
