@@ -1,6 +1,8 @@
 """
 match可以将一个值与多个值进行比较，类似java的Switch语句，但是case匹配不再执行其他case语句，不要break
 """
+import sys
+
 
 def http_status(status):
     match status:
@@ -56,5 +58,6 @@ check_point((45, 45))
 check_point((45, 45))
 try:
     check_point(20)
-except ValueError:
-    print('Error')
+except ValueError as v:
+    print('Error: ', v)
+    print(sys.exc_info())
