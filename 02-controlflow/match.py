@@ -17,6 +17,7 @@ def http_status(status):
         case _:
             print('Unkown Error')
 
+
 def http_status2(status):
     match status:
         case 200:
@@ -28,6 +29,7 @@ def http_status2(status):
         case _:
             print('Unkown Error')
 
+
 http_status(200)
 http_status(400)
 http_status(404)
@@ -36,6 +38,7 @@ http_status(401)
 
 http_status2(400)
 http_status2(500)
+
 
 # 匹配tuple
 def check_point(point):
@@ -50,6 +53,7 @@ def check_point(point):
             print(f'X={x}, Y={y}')
         case _:
             raise ValueError('Not a point')
+
 
 check_point((0, 0))
 check_point((0, 45))
