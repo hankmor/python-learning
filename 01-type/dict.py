@@ -9,7 +9,7 @@
 dict1 = {}
 dict2 = dict()
 print(dict1, id(dict1), type(dict1))
-print(dict, id(dict2), type(dict2))
+print(dict2, id(dict2), type(dict2))
 
 # 创建字典: key: value的格式
 dict1 = {"name": '张三', "age": 10, "from": 'china'}
