@@ -18,8 +18,13 @@ print(dict1)
 # 获取元素的值
 print(dict1.get("name"))
 print(dict1['name'])
-
 # 遍历字典
 for key in dict1:
     print(key, ": ", dict1[key])
 
+# 获取字典的key或value
+print(dict1.keys())
+print(dict1.values())
+# output:
+# dict_keys(['name', 'age', 'from'])
+# dict_values(['张三', 10, 'china'])
