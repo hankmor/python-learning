@@ -1,6 +1,8 @@
 words = ['cat', 'window', 'defenestrate']
 for w in words:
     print(w, len(w))
+else: # 循环结束后执行else
+    print("bye")
 
 """
 遍历集合时修改集合的内容，会很容易生成错误的结果。因此不能直接进行循环，而是应遍历该集合的副本或创建新的集合
