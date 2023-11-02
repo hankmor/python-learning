@@ -1,7 +1,7 @@
 words = ['cat', 'window', 'defenestrate']
 for w in words:
     print(w, len(w))
-else: # 循环结束后执行else
+else:  # 循环结束后执行else
     print("bye")
 
 """
@@ -12,7 +12,7 @@ else: # 循环结束后执行else
 users = {'Hans': 'active', 'Éléonore': 'inactive', '景太郎': 'active'}
 print(users)
 
-# 赋值然后修改集合的元素
+# 复制然后修改集合的元素
 for user, status in users.copy().items():
     if status == 'inactive':
         del users[user]
