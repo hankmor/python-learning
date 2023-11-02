@@ -40,8 +40,8 @@ print("aaa\rbbb")  # bbb
 print("aaa\bbbb")  # aabbb
 
 # 字符串是不可变的，即不可修改
-str = 'string'
-print(str[0])  # s
+str1 = 'string'
+print(str1[0])  # s
 # str[0] = 'S'  # TypeError: 'str' object does not support item assignment
 
 # ==========
@@ -57,26 +57,37 @@ print(str[0])  # s
 '''
 print('---------- string 切片 ----------')
 # 切片长度为后边的位置减前边的位置
-str = "hello,python"
-print(str[2:3])  # 从位置2开始切到为位置3，长度为1
-print(str[:])  # 切整个字符串
-print(str[0:6])  # 从第1个字符开始，切到第5个字符（不包含第5个），hello
-print(str[6:12])  # 切取python
-print(str[-6:12])  # 从-6的位置开始切取python
-print(str[-6:])  # 效果同上
-print(str[-12:-7])  # 从右向左，-7的位置排除，此时是逗号','
+str2 = "hello,python"
+print(str2[2:3])  # 从位置2开始切到为位置3，长度为1
+print(str2[:])  # 切整个字符串
+print(str2[0:6])  # 从第1个字符开始，切到第5个字符（不包含第5个），hello
+print(str2[6:12])  # 切取python
+print(str2[-6:12])  # 从-6的位置开始切取python
+print(str2[-6:])  # 效果同上
+print(str2[-12:-7])  # 从右向左，-7的位置排除，此时是逗号','
 
 # 获取字符串中的字符，如果下标越界则抛出异常
 # print(str[13])  # IndexError: string index out of range
 # 但是切片是可以自动处理越界
-print(str[0:15])  # hello,python
+print(str2[0:15])  # hello,python
 
 '''
 字符串存储在字符串池中，只要池中有该字符，则直接获取，所以id相同
 '''
 # 切片后字符串的id
-str = 'string'
-print(str, id(str))
+str1 = 'string'
+print(str1, id(str1))
 # 下标两个语句id相同
-print(str, id(str[0:3]))
-print(str, id(str[0:3]))
+print(str1, id(str1[0:3]))
+print(str1, id(str1[0:3]))
+
+# unicode
+ch = "【演唱会】2000-拉阔音乐会"
+u = ch.encode("unicode_escape")  # 输出unicode编码后的字节
+print(u)
+print(type(u))  # <class 'bytes'>
+s = u.decode("utf-8")
+print(type(s))  # <class 'str'>
+print(s)  # \u3010\u6f14\u5531\u4f1a\u30112000-\u62c9\u9614\u97f3\u4e50\u4f1a
+# 先编码为latin-1，然后再加码为unicode，输出为中文：【演唱会】2000-拉阔音乐会
+print(s.encode("latin-1").decode("unicode_escape"))
