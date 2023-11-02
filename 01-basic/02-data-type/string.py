@@ -91,3 +91,42 @@ print(type(s))  # <class 'str'>
 print(s)  # \u3010\u6f14\u5531\u4f1a\u30112000-\u62c9\u9614\u97f3\u4e50\u4f1a
 # 先编码为latin-1，然后再加码为unicode，输出为中文：【演唱会】2000-拉阔音乐会
 print(s.encode("latin-1").decode("unicode_escape"))
+s = "\u3010\u6f14\u5531\u4f1a\u30112000-\u62c9\u9614\u97f3\u4e50\u4f1a"
+print(s)  # 【演唱会】2000-拉阔音乐会
+# 使用r或者R可以原样使用字符串
+s = r"\u3010\u6f14\u5531\u4f1a\u30112000-\u62c9\u9614\u97f3\u4e50\u4f1a"
+print(s)
+
+
+# 格式化输出
+# %d	整数
+# %f	浮点数
+# %s	字符串
+# %x	十六进制整数
+# python 格式化与C类似，用 format % (参数列表) 的形式格式化输出字符串，如果只有一个参数可以省略括号
+s = "hello, %s" % "python"
+print(s)  # hello, python
+s = "you spend $%.2f, price: %.2f, number: %d" % (3.14, 3.14, 9)
+print(s)  # you spend $3.14, price: 3.14, number: 9
+fmt = "%-10s %-10s"
+title = fmt % ("format", "desc")
+print(title)
+print(fmt % ("%d", "整数"))
+print(fmt % ("%f", "浮点数"))
+print(fmt % ("%s", "字符串"))
+print(fmt % ("%x", "十六进制整数"))
+# format     desc
+# %d         整数
+# %f         浮点数
+# %s         字符串
+# %x         十六进制整数
+print("%x" % 10)  # 十六进制，a
+print("%o" % 10)  # 八进制，12
+# 使用format函数格式化字符串，使用{num}占位
+print('Hello, {0}, 成绩提升了 {1:.1f}%'.format(
+    '小明', 17.125))  # Hello, 小明, 成绩提升了 17.1%
+# 使用f开头的字符串格式化，通过{}引入变量的值并进行格式化
+r = 2.5
+s = 3.14 * r ** 2
+# The area of a circle with radius 2.5 is 19.62
+print(f'The area of a circle with radius {r} is {s:.2f}')

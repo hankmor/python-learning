@@ -1,3 +1,8 @@
+# bin 输出二进制字符串
+x = bin(10)
+print(type(x))  # <class 'str'>
+print(x)  # 0b1010
+
 # int(x [,base]) 将x转为整数，x必须为整数或者字符串，如果提供了进制，
 # 则x为字符串，且字符串必须与之对应，否则可能报错
 print(int("11", 2))  # 3
