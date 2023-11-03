@@ -1,4 +1,5 @@
 """
+python中没有switch，但可以使用match。
 match可以将一个值与多个值进行比较，类似java的Switch语句，但是case匹配不再执行其他case语句，不要break
 """
 import sys
@@ -14,7 +15,7 @@ def http_status(status):
             print('Not Found')
         case 500:
             print('Server Error')
-        case _:
+        case _:  # 其他任何情况
             print('Unkown Error')
 
 
@@ -65,3 +66,36 @@ try:
 except ValueError as v:
     print('Error: ', v)
     print(sys.exc_info())
+
+# 复杂匹配
+age = 15
+match age:
+    case x if x < 10:  # 匹配满足条件
+        print(f'< 10 years old: {x}')
+    case 10:
+        print('10 years old.')
+    case 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18:
+        print('11~18 years old.')
+    case 19:
+        print('19 years old.')
+    case _:
+        print('not sure.')
+
+# 匹配列表
+
+args = ['gcc', 'hello.c', 'world.c']
+# args = ['clean']
+# args = ['gcc']
+match args:
+    # 如果仅出现gcc，报错:
+    case ['gcc']:
+        print('gcc: missing source file(s).')
+    # 出现gcc，且至少指定了一个文件:
+    case ['gcc', file1, *files]:
+        print('gcc compile: ' + file1 + ', ' + ', '.join(files))
+    # 仅出现clean:
+    case ['clean']:
+        print('clean')
+    case _:
+        print('invalid command.')
+

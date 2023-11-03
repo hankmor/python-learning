@@ -24,6 +24,12 @@ print(tuple + tinytuple)   # 打印组合的元组
 
 # int与tuple的歧义, 元组中只有一个元素时，定义的是int，所以python规定在元素后需要追加一个逗号才能定义为元组
 x = (1)
-print(type(x)) # <class 'int'>
+print(type(x))  # <class 'int'>
 x = (1,)
-print(type(x)) # <class 'tuple'>
+print(type(x))  # <class 'tuple'>
+
+# tuple本身虽然不可边，但是其中的元素可能会变化，比如内部包含list元素
+t = (1, 'a', ['x', 'y'])
+print(t)  # (1, 'a', ['x', 'y'])
+t[2][0] = 'z'
+print(t)  # (1, 'a', ['z', 'y'])
