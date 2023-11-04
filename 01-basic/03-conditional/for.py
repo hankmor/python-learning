@@ -25,3 +25,12 @@ for user, status in users.items():
         active_users[user] = status
 print(users)
 print(active_users)
+
+# 按照下标迭代，可以使用enumerate函数将lis转为下标-元素
+for i, value in enumerate(['A', 'B', 'C']):
+    print(i, value)
+
+
+# 引用两个变量迭代
+for x, y in [(1, 1), (2, 4), (3, 9)]:
+    print(x, y)
