@@ -16,11 +16,18 @@ dict1 = {"name": '张三', "age": 10, "from": 'china'}
 print(dict1)
 
 # 获取元素的值
-print(dict1.get("name"))
-print(dict1['name'])
+print(dict1['name'])  # 如果key不存在，会抛出异常
+print(dict1.get("name"))  # 如果key不存在，返回none
+print(dict1.get("name1"))  # 如果key不存在，返回None,第二个参数为指定的值
+print(dict1.get("name1", "unknown-user"))  # unknown-user
+# 删除元素，使用pop方法
+dict1.pop("name") # {'age': 10, 'from': 'china'}
+print(dict1)
+
 # 遍历字典
 for key in dict1:
     print(key, ": ", dict1[key])
+
 
 # 获取字典的key或value
 print(dict1.keys())
