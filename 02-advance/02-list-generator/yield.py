@@ -82,3 +82,36 @@ while True:
 # 5
 # 8
 # f's return value:  done
+
+
+print("====")
+
+
+# 使用list 生成器打印杨辉三角
+# [1]
+# [1, 1]
+# [1, 2, 1]
+# [1, 3, 3, 1]
+# [1, 4, 6, 4, 1]
+# [1, 5, 10, 10, 5, 1]
+# [1, 6, 15, 20, 15, 6, 1]
+# [1, 7, 21, 35, 35, 21, 7, 1]
+# [1, 8, 28, 56, 70, 56, 28, 8, 1]
+# [1, 9, 36, 84, 126, 126, 84, 36, 9, 1]
+def yanghui_triangle(max):
+    n, a, b = 0, [1], []
+    while n < max:
+        yield a
+        for v in range(0, len(a)+1):  # b 中的元素数量比当前 a 中的多一个
+            if v == 0 or v == len(a):
+                b.append(a[0])  # 第一个和最后一个位置的元素取 a 的第一个元素
+            else:
+                # b 中当前位置元素 = a 中当前位置前一个元素 + a 中当前位置的元素
+                b.append(a[v-1] + a[v])
+        a, b = b, []  # b 需要重置
+        n = n + 1
+
+
+f = yanghui_triangle(10)
+for x in f:
+    print(x)
