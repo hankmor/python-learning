@@ -131,3 +131,5 @@ dmypy.json
 .vscode
 .idea
 .DS_Store
+__pycache__
+__pypackages__
