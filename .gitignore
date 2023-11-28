@@ -133,3 +133,5 @@ dmypy.json
 .DS_Store
 __pycache__
 __pypackages__
+
+vscode-mac*
