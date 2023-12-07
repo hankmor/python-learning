@@ -20,3 +20,4 @@ print(f'a={a}, b={b}, c={c}')
 # a=1, b=1, c=1
 del a,b,c # 可以使用 del 删除变量
 # print(f'a={a}, b={b}, c={c}') # NameError: name 'a' is not defined
+
