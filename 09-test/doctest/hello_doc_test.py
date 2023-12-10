@@ -33,7 +33,7 @@ if __name__ == '__main__':
 # 命令行执行 python3 hello_doc_test.py，没有任何输出说明文档测试通过
 # 如果将 abs(0) 改为 abs(1) 则会输出异常, 告诉我们哪儿未测试通过，期望值和得到的值都是什么，异常如下：
 # **********************************************************************
-# File "/Users/hank/workspace/mine/python-projects/python-learning/08-test/doctest/hello_doc_test.py", line 18, in __main__.abs
+# File "/Users/hank/workspace/mine/python-projects/python-learning/09-test/doctest/hello_doc_test.py", line 18, in __main__.abs
 # Failed example:
 #     abs(1)
 # Expected:
