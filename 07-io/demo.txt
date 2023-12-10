@@ -1,0 +1,4 @@
+hello
+python
+I am hank
+来一点中文
