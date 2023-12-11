@@ -19,11 +19,11 @@ person('章三', 20, hobby='program', dept='dev')
 d = {'hobby': 'program', 'dept': 'dev'}
 person('章三', 20, **d)
 
-
 """
 命名关键字参数
 用于限制关键字参数的名称，也就是说只接受特定名称的关键字参数，其他的不接收
 """
+
 
 # 虽然可以通过 in 来判断 kw的dict中是否有对应的key，但是无法限制调用者传递其他更多参数，此时需要用到命名关键字参数
 
@@ -48,8 +48,10 @@ def person(name, age, *, hobby, dept):
 # 命名关键字参数必须传入参数名称，否则报错
 # person('章三', 20, hobby='program') # TypeError: person() missing 1 required keyword-only argument: 'dept'
 person('章三', 20, hobby='program', dept='dev')
-# 现在，其他无用的参数不能再传入了
-# person('章三', 20, hobby='program', dept='dev', haha='unused') # TypeError: person() got an unexpected keyword argument 'haha'
+
+
+# 现在，其他无用的参数不能再传入了 person('章三', 20, hobby='program', dept='dev', haha='unused') # TypeError: person() got an
+# unexpected keyword argument 'haha'
 
 
 # 但是关键字参数必须传入的话，与普通参数就没什么区别了，如果实现选择行传入呢，可以使用参数默认值
