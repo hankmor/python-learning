@@ -1,6 +1,8 @@
 """
 Python没有专门处理字节的数据类型,但由于 b'str' 可以表示字节，所以，字节数组＝二进制str。
 而在C语言中，我们可以很方便地用struct、union来处理字节，以及字节和int，float的转换。
+
+https://docs.python.org/3.9/library/struct.html
 """
 import struct
 
@@ -47,3 +49,12 @@ print(i)  # (10240099,)
 # IH 的含义为: 转换时后面的bytes依次变为I：4字节无符号整数 和 H：2字节无符号整数。
 i = struct.unpack('>IH', b'\xf0\xf0\xf0\xf0\x80\x80')
 print(i)  # (4042322160, 32896)
+
+# h: short, 2 个字节
+# l: long, 4 个字节
+b = struct.pack('hhl', 1, 2, 3)
+print(b)  # b'\x01\x00\x02\x00\x00\x00\x00\x00\x03\x00\x00\x00\x00\x00\x00\x00'
+s = struct.unpack('hhl', b'\x01\x00\x02\x00\x00\x00\x00\x00\x03\x00\x00\x00\x00\x00\x00\x00')
+print(s)  # (1, 2, 3)
+l = struct.calcsize('hhl')
+print(l)  # 16
