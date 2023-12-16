@@ -60,12 +60,12 @@ def pi(N):
     odds = itertools.count(1, 2)
 
     # step 2: 取该序列的前N项: 1, 3, 5, 7, 9, ..., 2*N-1.
-    selodds = itertools.takewhile(lambda x: x <= 2 * N - 1, odds)
+    sel_odds = itertools.takewhile(lambda x: x <= 2 * N - 1, odds)
 
     # step 3: 添加正负符号并用4除: 4/1, -4/3, 4/5, -4/7, 4/9, ...
     # step 4: 求和
     # 求和用 sum 函数，后边的列表中，x 为 1,3,5...,用 //2 整除2后，得到 0，1，2...,在 (-1) ** (x//2) 就可以加上负号了
-    return sum(4 / x * ((-1) ** (x // 2)) for x in selodds)
+    return sum(4 / x * ((-1) ** (x // 2)) for x in sel_odds)
 
 
 print(pi(10))
