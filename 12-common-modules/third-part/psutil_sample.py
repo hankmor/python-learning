@@ -63,7 +63,7 @@ print("cmdline:", p.cmdline())  # 进程启动的命令行
 print("ppid:", p.ppid())  # 父进程ID
 print("parend:", p.parent())  # 父进程
 print("children:", p.children())  # 子进程列表
-p.username()  # 进程用户名
+print("username:", p.username())  # 进程用户名
 print("create_time:", p.create_time())  # 进程创建时间
 print("terminal:", p.terminal())  # 进程终端
 print("cpu_times:", p.cpu_times())  # 进程使用的CPU时间
