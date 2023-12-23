@@ -1,10 +1,14 @@
 """
-通过 SMTP 发送 html 邮件，详见 smtp_text.py
+发送带附件的邮件
 
-发送html与发送纯文本文件几乎完全相同，只是构建 MIMEText 时传入的是 html 内容，并且 subtype 为 html
+带附件的邮件可以看做包含若干部分的邮件：文本和各个附件本身，所以，可以构造一个MIMEMultipart对象代表邮件本身，
+然后往里面加上一个MIMEText作为邮件正文，再继续往里面加上表示附件的MIMEBase对象即可
 """
 import smtplib
+from email import encoders
 from email.header import Header
+from email.mime.base import MIMEBase
+from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import parseaddr, formataddr
 
@@ -19,22 +23,37 @@ def _format_addr(s):
     return formataddr((Header(name, 'utf-8').encode(), addr))
 
 
-# 将html文本传入并创建 MIMEText 对象
-msg = MIMEText('''<html><body><h1>Hello</h1>
-<p>send by <a href="http://www.python.org">Python</a>...</p>
-</body></html>''', 'html', 'utf-8')
-
 # 发送人地址
 from_addr = input('From: ')
 # 发件人需要邮箱密码才能发送
 pwd = input('Password: ')
 # 收件人地址
 to_addr = input('To: ')
+
 # 设置 From、To、Subject 等信息，注意，邮件中这些信息通过 name <addr@example.com> 来设置，中间有一个空格，需要自己构建
 # 如果有中文，还需要通过 Header 对象进行编码，避免乱码
+# 创建邮件对象
+msg = MIMEMultipart()
+# 创建邮件正文MIMEText对象
+msg.attach(MIMEText('send with file...', 'plain', 'utf-8'))
 msg['From'] = _format_addr('Python爱好者 <%s>' % from_addr)
 msg['To'] = _format_addr('管理员 <%s>' % to_addr)  # 多个收件人以,分隔即可
 msg['Subject'] = Header('来自SMTP的问候……', 'utf-8').encode()
+# 添加附件就是加上一个MIMEBase，从本地读取一个图片
+with open('test.jpg', 'rb') as f:
+    # 设置附件的MIME和文件名，类型是 jpg
+    mime = MIMEBase('image', 'jpg', filename='这个名字随便取.jpg')
+    # 加上必要的头信息
+    mime.add_header('Content-Disposition', 'attachment', filename='test.png')  # 这个名字为附件的名称
+    mime.add_header('Content-ID', '<0>')  # 给附件编号，在 html 可以引用附件
+    mime.add_header('X-Attachment-Id', '0')
+    # 把附件的内容读进来
+    mime.set_payload(f.read(), 'utf-8')
+    # 用Base64编码
+    encoders.encode_base64(mime)
+    # 添加附件对象到MIMEMultipart
+    msg.attach(mime)
+
 # 发件人的服务器 smtp 地址
 smtp_server = input('SMTP Server: ')
 # 创建 SMTP server
