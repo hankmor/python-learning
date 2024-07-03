@@ -4,7 +4,7 @@ python中，oop编程使用 class 关键字定义类
 
 
 # 定义User类，包含 name、age 两个属性
-class User():
+class User:
     # __init__就是构造器，创建 User 实例时必须指定 nage 和 age 两个参数，第一个参数 self 表明创建的实例本身，
     # python 解释器会自动添加
     def __init__(self, name, age):

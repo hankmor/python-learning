@@ -4,8 +4,8 @@ https://dev.mysql.com/doc/connector-python/en/
 
 首先需要安装mysql驱动：pip install mysql-connector-python
 """
-import functools
 
+import functools
 import mysql.connector
 
 
@@ -13,7 +13,12 @@ def connect(fn):
     @functools.wraps(fn)  # 包装后函数名称不变
     def wrapper(*args, **kw):
         # 连接数据库
-        conn = mysql.connector.connect(host='127.0.0.1', user='root', password='123456', database='test')
+        conn = mysql.connector.connect(
+            host="127.0.0.1",
+            user="root",
+            password="123456",
+            database="test",
+        )
         if len(args) > 1:
             if isinstance(args[0], mysql.connector.CMySQLConnection):
                 conn = args[0]
@@ -30,8 +35,8 @@ def connect(fn):
 @connect
 def get_one(conn):
     c = conn.cursor()
-    # 查询一条记录，注意MySQL中占位符是 %s
-    c.execute('''SELECT * FROM user1 WHERE id = %s''', (1,))
+    # 查询一条记录，注意MySQL中占位符是 %s, 参数必须是一个tuple
+    c.execute("""SELECT * FROM user1 WHERE id = %s""", (1,))
     user = c.fetchone()  # 返回是一个 tuple
     return user
 
@@ -63,10 +68,10 @@ def insert_many(conn):
     # 打开游标
     c = conn.cursor()
     # 插入多条记录
-    users = [('hank', 20), ('jason', 18)]
+    users = [("hank", 20), ("jason", 18)]
     # mysql 没有自动转换的方式，只能手动拼接sql
-    s = ",".join(["(" + ','.join(['%s'] * len(users)) + ")"] * len(users[0]))
-    sql = '''INSERT INTO user1 (name, age) VALUES %s''' % s
+    s = ",".join(["(" + ",".join(["%s"] * len(users)) + ")"] * len(users[0]))
+    sql = """INSERT INTO user1 (name, age) VALUES %s""" % s
     print(sql)
     args = []
     for user in users:
@@ -76,7 +81,10 @@ def insert_many(conn):
     c.execute(sql, tuple(args))
     # c.execute('''INSERT INTO user1 (name, age) VALUES (%s, %s),(%s, %s)''', ('hank', 20, 'jason', 18))
     # 还可以使用 dict 用作命名参数
-    c.execute('''INSERT INTO user1 (name, age) VALUES (%(name)s, %(age)s)''', {'name': 'zhangsan', 'age': 20})
+    c.execute(
+        """INSERT INTO user1 (name, age) VALUES (%(name)s, %(age)s)""",
+        {"name": "zhangsan", "age": 20},
+    )
     conn.commit()  # 别忘了提交事务
     return c.rowcount
 
@@ -86,8 +94,8 @@ def delete_by_name(conn, names):
     c = conn.cursor()
     # mysql 没有将 list 或者 tuple 转为参数的形式？需要手动拼sql
     # https://stackoverflow.com/questions/4574609/executing-select-where-in-using-mysqldb
-    s = ','.join(['%s'] * len(names))
-    c.execute('''DELETE FROM user1 WHERE name IN (%s)''' % s, names)
+    s = ",".join(["%s"] * len(names))
+    c.execute("""DELETE FROM user1 WHERE name IN (%s)""" % s, names)
     conn.commit()
     return c.rowcount
 
@@ -96,7 +104,7 @@ def delete_by_name(conn, names):
 def get_all(conn):
     c = conn.cursor()
     # 查询所有
-    c.execute('''SELECT * FROM user1''')
+    c.execute("""SELECT * FROM user1""")
     data = c.fetchall()  # 返回的是一个list
     return data
 
@@ -104,7 +112,7 @@ def get_all(conn):
 tbl = desc_table()
 print(tbl)
 
-print(delete_by_name(['hank', 'jason']))
+print(delete_by_name(["hank", "jason"]))
 
 r = insert_many()
 print(r)
