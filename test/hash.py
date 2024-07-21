@@ -10,6 +10,7 @@ subdomain.example.eth的计算过程：按照"."分隔递归计算，直到没�
 
 keccak对应python中的sha3。
 """
+
 import sys
 import hashlib
 import _pysha3 as sha3
@@ -19,25 +20,25 @@ import _pysha3 as sha3
 
 
 def name_hash(name):
-    if name == '':
-        return '\0' * 32  # string
+    if name == "":
+        return "\0" * 32  # string
     else:
-        '''
+        """
         将字符串按照给定符号分隔：
         label：分隔符之前的部分
         separator：分隔符
         reminder：剩下的部分
-        '''
-        label, separator, reminder = name.partition('.')
+        """
+        label, separator, reminder = name.partition(".")
         label_hash = hashlib.sha3_256(label.encode()).hexdigest()
         return hashlib.sha3_256((name_hash(reminder) + label_hash).encode()).hexdigest()
 
 
 def name_keccak(name):
-    if name == '':
-        return '\0' * 32
+    if name == "":
+        return "\0" * 32
     else:
-        label, separator, reminder = name.partition('.')
+        label, separator, reminder = name.partition(".")
         label_hash = sha3.keccak_256(label.encode()).hexdigest()
         return sha3.keccak_256((name_hash(reminder) + label_hash).encode()).hexdigest()
 
@@ -46,8 +47,8 @@ def keccak(str):
     return sha3.keccak_256(str.encode()).hexdigest()
 
 
-if __name__ == '__main__':
-    domain = 'ethereum.eth'
+if __name__ == "__main__":
+    domain = "ethereum.eth"
     # print(domain.partition("."))
     # print(hashlib.sha3_512(domain.encode()).hexdigest())
     v1 = name_hash(domain)  # ethereum . eth
