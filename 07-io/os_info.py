@@ -1,7 +1,9 @@
 """
 使用 os 模块获取系统信息
 """
+
 import os
+
 
 # ================================================
 # 获取系统
@@ -33,8 +35,14 @@ p = os.path.splitext("/user/hank/test.txt")
 print(p)  # ('/user/hank/test', '.txt')
 
 # 列出目录下的所有目录，只需要一行代码，使用列表生成式
-d = [p for p in os.listdir("../../python-learning") if os.path.isdir(os.path.join("..", p))]
+d = [
+    p
+    for p in os.listdir("../../python-learning")
+    if os.path.isdir(os.path.join("..", p))
+]
 print(d)
 # 列出所有的 .py 文件
-d = [p for p in os.listdir(".") if os.path.isfile(p) and os.path.splitext(p)[1] == '.py']
+d = [
+    p for p in os.listdir(".") if os.path.isfile(p) and os.path.splitext(p)[1] == ".py"
+]
 print(d)
