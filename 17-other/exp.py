@@ -48,12 +48,11 @@ def exp_model(x, M, k):
 # ============= 生成数据点 =============
 # 使用 np.arange 生成整数序列
 # 参数说明：
-#   - 起始值: 1（从1开始）
-#   - 终止值: count+1（到count结束，不包含count+1）
+#   - 起始值: 0（从0开始，确保第一个y值等于init_value）
+#   - 终止值: count（不包含count，所以最后一个是count-1）
 #   - 步长: 1（默认，每次递增1）
-# 生成的序列：[1, 2, 3, 4, ..., count]
-x = np.arange(1, count+1)
-# x = np.linspace(0, count, count)
+# 生成的序列：[0, 1, 2, 3, ..., count-1]，共count个点
+x = np.arange(0, count)
 
 # ============= 设置不同的参数组合 =============
 # 每组参数展示不同的增长速率
@@ -69,10 +68,10 @@ params = [
 #   y轴：函数值（从0.001到1）- 表示在该点处达到的值
 plt.figure(figsize=(8, 6))
 
-print(exp_model(1, M=max_value-init_value, k=0.0001))
+# 验证：第一个点（x=0）的y值应该等于init_value
+print("第一个点 x=0 时，y =", exp_model(0, M=max_value-init_value, k=0.0001))
 
 for param in params:
-    print(x)
     # 计算每个x对应的y值
     y_values = exp_model(x, M=max_value-init_value, k=param['k'])
     
