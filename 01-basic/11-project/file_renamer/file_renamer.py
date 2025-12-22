@@ -1,3 +1,4 @@
+# file_renamer.py
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
@@ -9,11 +10,6 @@
 """
 
 import os
-import sys
-
-# 添加当前目录到sys.path，确保能导入模块
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
 from renamer import FileRenamer
 from utils import list_files
 

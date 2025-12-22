@@ -15,28 +15,26 @@ def list_files(directory, extension=None, pattern=None):
     """
     files = []
     
-    try:
-        # 检查目录是否存在
-        if not os.path.exists(directory):
-            return []
-            
-        for filename in os.listdir(directory):
-            filepath = os.path.join(directory, filename)
-            
-            # 只处理文件，忽略目录
-            if not os.path.isfile(filepath):
-                continue
-            
-            # 扩展名过滤
-            if extension and not filename.endswith(extension):
-                continue
-            
-            # 文件名模式过滤
-            if pattern and pattern not in filename:
-                continue
-            
-            files.append(filepath)
-    except Exception as e:
-        print(f"读取目录出错: {e}")
+    # 检查目录是否存在
+    if not os.path.exists(directory):
+        print(f"Error: Directory '{directory}' does not exist.")
+        return []
+
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
+        
+        # 只处理文件，忽略目录
+        if not os.path.isfile(filepath):
+            continue
+        
+        # 扩展名过滤
+        if extension and not filename.endswith(extension):
+            continue
+        
+        # 文件名模式过滤
+        if pattern and pattern not in filename:
+            continue
+        
+        files.append(filepath)
     
     return files

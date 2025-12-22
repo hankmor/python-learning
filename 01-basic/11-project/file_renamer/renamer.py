@@ -72,29 +72,24 @@ class FileRenamer:
         
         # 保存操作历史
         self.save_history()
-        # 清空更改，避免重复执行
-        self.changes = []
     
     def save_history(self):
         """保存操作历史（简化版）"""
         history_file = os.path.join(self.directory, "history.json")
-        if not os.path.exists(self.directory):
-             # Fallback to current dir if directory is invalid
-             history_file = "history.json"
-
+        
         # 读取现有历史
         history = []
         if os.path.exists(history_file):
             try:
                 with open(history_file, 'r', encoding='utf-8') as f:
                     history = json.load(f)
-            except:
-                pass
+            except Exception:
+                pass # Ignore errors reading history
         
         # 添加新记录
         history.append({
             'time': datetime.now().isoformat(),
-            'changes': [(os.path.basename(old), os.path.basename(new)) for old, new in self.changes]
+            'changes': [(old, new) for old, new in self.changes]
         })
         
         # 保存
@@ -102,4 +97,4 @@ class FileRenamer:
             with open(history_file, 'w', encoding='utf-8') as f:
                 json.dump(history, f, indent=2, ensure_ascii=False)
         except Exception as e:
-            print(f"保存历史记录失败: {e}")
+            print(f"Warning: Could not save history: {e}")
