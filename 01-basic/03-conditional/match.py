@@ -99,3 +99,22 @@ match args:
     case _:
         print('invalid command.')
 
+def get_weekday(day):
+    match day:
+        case 1:
+            return "星期一"
+        case 2:
+            return "星期二"
+        case 3:
+            return "星期三"
+        case 4:
+            return "星期四"
+        case 5:
+            return "星期五"
+        case 6 | 7:  # 或模式
+            return "周末"
+        case _:  # 默认情况
+            return "无效的日期"
+
+print(get_weekday(1))  # 星期一
+print(get_weekday(6))  # 周末
