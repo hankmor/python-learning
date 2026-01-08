@@ -34,6 +34,13 @@ print("5 index: ", lst.index(5))
 print(lst.index(5, 4, 6))  # 查找元素5，范围从下标4到6内找，找到第一个5: 5
 print(lst.index(5, 6, 8))  # 查找元素5，范围从下标6到8内找，找到第二个5: 6
 
+print("====统计元素 count====")
+# count()：统计元素出现次数
+lst_count = [1, 2, 3, 4, 1, 1, 2]
+print(f"1出现次数: {lst_count.count(1)}")  # 3
+print(f"5出现次数: {lst_count.count(5)}")  # 0
+
+
 # 可以混合存储多个数据类型
 lst = ["a", 1, 1.0, [1, "a"]]
 print(lst)
@@ -98,6 +105,11 @@ print(lst)  # [1, 2, 3, 4, [5, 6]] 可以看到在列表加了一个元素，该
 lst.extend(lst2)
 print(lst)  # [1, 2, 3, 4, [5, 6], 5, 6]
 
+# insert()：指定位置插入
+lst.insert(1, "inserted")
+print(f"插入后: {lst}")
+
+
 # 通过切片来赋值
 lst3 = [True, False]
 lst[1:] = lst3  # 从第一个元素开始，切掉后边的所有元素，换成lst3中的元素
@@ -159,10 +171,47 @@ lst = [10, 8, 5, 9, 14]
 # 通过内置方法sorted排序，产生新的列表，默认为升序排序
 sortedList = sorted(lst)
 print(sortedList)  # [5, 8, 9, 10, 14]
-# sorted降序
 sortedList = sorted(lst, reverse=True)
 print(sortedList)  # [14, 10, 9, 8, 5]
 print(lst)  # [10, 8, 5, 9, 14]
+
+# reverse()：反转列表（原地修改）
+lst_rev = [1, 2, 3, 4, 5]
+lst_rev.reverse()
+print(f"reverse结果: {lst_rev}")  # [5, 4, 3, 2, 1]
+
+# reversed()：返回反转的迭代器
+lst_rev2 = [1, 2, 3]
+print(f"reversed结果: {list(reversed(lst_rev2))}")  # [3, 2, 1]
+
+"""
+常用统计函数
+"""
+print("====常用统计函数====")
+nums = [1, 2, 3, 4, 5]
+print(f"min: {min(nums)}")  # 1
+print(f"max: {max(nums)}")  # 5
+print(f"sum: {sum(nums)}")  # 15
+
+"""
+列表复制
+"""
+print("====列表复制====")
+original = [1, 2, [3, 4]]
+# 1. 切片复制
+copy1 = original[:]
+# 2. list()复制
+copy2 = list(original)
+# 3. copy()方法
+copy3 = original.copy()
+
+print(f"original: {original}")
+print(f"copy1: {copy1}")
+print(f"copy3: {copy3}")
+# 注意：这些都是浅拷贝
+original[2][0] = 999
+print(f"修改原列表嵌套元素后 copy1: {copy1}")  # copy1也会变
+
 
 '''
 列表生成公式
@@ -176,3 +225,14 @@ print(lst)  # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 # 生成一个列表，元素为小于等于10的偶数
 lst = [i * 2 for i in range(6)]
 print(lst)  # [0, 2, 4, 6, 8, 10]
+
+"""
+嵌套列表
+"""
+print("====嵌套列表====")
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+# 遍历二维列表
+for row in matrix:
+    for element in row:
+        print(element, end=" ")
+    print()
